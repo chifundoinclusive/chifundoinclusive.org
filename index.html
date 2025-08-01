@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chifundo Inclusive Secondary School</title>
+  <style>
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Header Styles */
+    header {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #f4f4f4;
+      position: relative;
+    }
+
+    .logo {
+      max-width: 120px;
+      height: auto;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Navigation Styles */
+    nav {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+
+    .menu-toggle {
+      display: block;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #0066cc;
+      cursor: pointer;
+    }
+
+    nav ul {
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: #f4f4f4;
+      padding: 1rem;
+      position: absolute;
+      top: 2.5rem;
+      right: 0;
+      width: 200px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    nav ul.active {
+      display: flex;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    nav ul li a:hover {
+      color: #003366;
+    }
+
+    /* Welcome Section with Background Slideshow */
+    #welcome {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      background-size: cover;
+      background-position: center;
+      animation: slideshow 65s infinite;
+      padding: 2rem;
+      display: none;
+    }
+
+    #welcome.active {
+      display: flex;
+    }
+
+    #welcome.hidden {
+      display: none;
+    }
+
+    /* Overlay for text readability */
+    #welcome::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    #welcome h2, #welcome p, #welcome .portal-card {
+      position: relative;
+      z-index: 2;
+    }
+
+    #welcome h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    #welcome p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Portal Card Styles */
+    .portal-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .portal-card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .portal-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .portal-card h3 {
+      font-size: 1.4rem;
+      color: #0066cc;
+      margin-bottom: 1rem;
+    }
+
+    .portal-card a {
+      display: block;
+      padding: 0.5rem;
+      background-color: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .portal-card a:hover {
+      background-color: #003366;
+    }
+
+    /* Slideshow Animation */
+    @keyframes slideshow {
+      0%, 7.69% { background-image: url('https://i.postimg.cc/MZn422k3/IMG-20250722-WA0086.jpg'); }
+      7.69%, 15.38% { background-image: url('https://i.postimg.cc/Cdyk9fy0/IMG-20250722-WA0087.jpg'); }
+      15.38%, 23.07% { background-image: url('https://i.postimg.cc/mZKnTXBL/IMG-20250722-WA0088.jpg'); }
+      23.07%, 30.76% { background-image: url('https://i.postimg.cc/0jK7t0BZ/IMG-20250722-WA0090.jpg'); }
+      30.76%, 38.46% { background-image: url('https://i.postimg.cc/3JpcNXxg/IMG-20250722-WA0091.jpg'); }
+      38.46%, 46.15% { background-image: url('https://i.postimg.cc/3wrStzCB/IMG-20250722-WA0092.jpg'); }
+      46.15%, 53.84% { background-image: url('https://i.postimg.cc/52VkCXXD/IMG-20250722-WA0094.jpg'); }
+      53.84%, 61.53% { background-image: url('https://i.postimg.cc/Sxf17m8R/IMG-20250722-WA0095.jpg'); }
+      61.53%, 69.23% { background-image: url('https://i.postimg.cc/s2nnqKTR/IMG-20250722-WA0096.jpg'); }
+      69.23%, 76.92% { background-image: url('https://i.postimg.cc/PxP6jZ7v/IMG-20250722-WA0097.jpg'); }
+      76.92%, 84.61% { background-image: url('https://i.postimg.cc/WzZXDVT2/IMG-20250722-WA0098.jpg'); }
+      84.61%, 92.30% { background-image: url('https://i.postimg.cc/sXqTDxF6/IMG-20250722-WA0099.jpg'); }
+      92.30%, 100% { background-image: url('https://i.postimg.cc/QNK6YQ5R/IMG-20250722-WA0100.jpg'); }
+    }
+
+    /* Main Section Styles */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    section.hidden {
+      display: none;
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #0066cc;
+    }
+
+    section p, section a {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    section a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section a:hover {
+      text-decoration: underline;
+    }
+
+    section div {
+      margin-bottom: 1.5rem;
+    }
+
+    section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Home Link Styles */
+    .home-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .home-link:hover {
+      background-color: #003366;
+    }
+
+    /* External Link Styles */
+    .external-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .external-link:hover {
+      background-color: #003366;
+    }
+
+    /* Gallery Section Styles */
+    #gallery {
+      text-align: center;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    #gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      object-fit: contain;
+    }
+
+    #gallery video {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      object-fit: cover;
+      max-height: 300px;
+    }
+
+    /* Footer Styles */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #f4f4f4;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      .logo {
+        max-width: 150px;
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      nav {
+        position: static;
+      }
+
+      nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+        padding: 0;
+        position: static;
+        width: auto;
+        box-shadow: none;
+        max-height: none;
+        overflow-y: visible;
+      }
+
+      #welcome {
+        min-height: 70vh;
+      }
+
+      #welcome.active {
+        display: flex;
+      }
+
+      #welcome h2 {
+        font-size: 2.2rem;
+      }
+
+      .portal-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .portal-card {
+        flex: 1;
+        min-width: 250px;
+        max-width: 300px;
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
+
+      section h3 {
+        font-size: 1.4rem;
+      }
+
+      /* Grid layout for sections */
+      #about, #features, #gallery, #testimonials, #contact,
+      #submit-results, #view-results, #admin-portal {
+        display: none;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      #about.active, #features.active, #gallery.active, #testimonials.active, #contact.active,
+      #submit-results.active, #view-results.active, #admin-portal.active {
+        display: grid;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .logo {
+        max-width: 180px;
+      }
+
+      header {
+        padding: 2rem;
+      }
+
+      main {
+        padding: 2rem;
+      }
+
+      #welcome {
+        min-height: 80vh;
+      }
+
+      #welcome h2 {
+        font-size: 2.5rem;
+      }
+
+      #welcome p {
+        font-size: 1.2rem;
+      }
+
+      section h2 {
+        font-size: 2.5rem;
+      }
+
+      section p, section a {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.postimg.cc/1tWcX4xx/IMG-20250721-WA0039.jpg" alt="Chifundo Inclusive Secondary School Logo" class="logo">
+    <h1>Chifundo Inclusive Secondary School</h1>
+    <nav>
+      <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+      <ul>
+        <li><a href="#welcome" data-section="welcome">Home</a></li>
+        <li><a href="#about" data-section="about">About</a></li>
+        <li><a href="#features" data-section="features">Features</a></li>
+        <li><a href="#gallery" data-section="gallery">Gallery</a></li>
+        <li><a href="#testimonials" data-section="testimonials">Testimonials</a></li>
+        <li><a href="#contact" data-section="contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="welcome" class="active">
+      <h2>Welcome to Chifundo Inclusive Secondary School</h2>
+      <p>Empowering all students through inclusive education and digital innovation.</p>
+      <div class="portal-container">
+        <div class="portal-card">
+          <h3>Teachers Portal</h3>
+          <a href="#submit-results" data-section="submit-results">Enter Teachers Portal</a>
+        </div>
+        <div class="portal-card">
+          <h3>Students Results Portal</h3>
+          <a href="#view-results" data-section="view-results">Enter Results Portal</a>
+        </div>
+        <div class="portal-card">
+          <h3>Admin Portal</h3>
+          <a href="#admin-portal" data-section="admin-portal" class="admin-link" data-requires-password="true">Enter Admin Portal</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="submit-results" class="hidden">
+      <h2>Submit Results</h2>
+      <div>
+        <h3>Upload Student Results</h3>
+        <p>Teachers can submit student results for various subjects and terms. Use the form to upload grades and generate performance reports.</p>
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+
+    <section id="view-results" class="hidden">
+      <h2>View Results</h2>
+      <div>
+        <h3>Check Your Academic Results</h3>
+        <p>Students can access their academic results by logging in with their credentials. View detailed performance reports and track progress over time.</p>
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+
+    <section id="admin-portal" class="hidden">
+      <h2>Admin Portal</h2>
+      <div>
+        <h3>Manage Teacher Accounts</h3>
+        <p>Create, update, or reset login credentials for teachers to access the Teachers Portal and other systems.</p>
+      </div>
+      <div>
+        <h3>Fees Management</h3>
+        <p>Manage student fee payments, generate invoices, and monitor outstanding balances.</p>
+      </div>
+      <div>
+        <h3>Student Registration</h3>
+        <p>Register new students, capturing essential details such as personal information, academic history, and special needs requirements.</p>
+        <a href="https://script.google.com/macros/s/AKfycbyp4tq0vAAK728y8-eGr4xv7zhtuwv-h0TNRSlnodIRt6IPmebB81EQK7waD_PrUzxX2g/exec" target="_blank" class="external-link">Go to Student Registration</a>
+      </div>
+      <div>
+        <h3>Student Database Management</h3>
+        <p>Maintain and update the student database, including academic records, contact details, and special accommodations.</p>
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+
+    <section id="about" class="hidden">
+      <h2>About Our School</h2>
+      <div>
+        <h3>Our Mission</h3>
+        <p>Chifundo Inclusive Secondary School, established on 16th September 2024, is committed to providing quality education for all students, including those with special needs.</p>
+      </div>
+      <div>
+        <h3>Inclusive Approach</h3>
+        <p>We ensure every student receives the support they need to thrive academically and socially, celebrating diversity and fostering potential. Students with special needs are given a 100% bursary to ensure equal access to education.</p>
+      </div>
+      <div>
+        <h3>Our Facilities</h3>
+        <p>With state-of-the-art facilities and dedicated educators, we achieve outstanding academic results while focusing on character and community.</p>
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+
+    <section id="features" class="hidden">
+      <h2>Key Features</h2>
+      <div>
+        <h3>Inclusive Education</h3>
+        <p>Tailored support and resources to ensure all students, regardless of ability, succeed in their academic journey.</p>
+      </div>
+      <div>
+        <h3>Performance Tracking</h3>
+        <p>Monitor and analyze student performance across subjects with detailed reports and analytics.</p>
+      </div>
+      <div>
+        <h3>Report Generation</h3>
+        <p>Generate comprehensive PDF reports to track academic progress and achievements.</p>
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+
+    <section id="gallery" class="hidden">
+      <h2>School Gallery</h2>
+      <div class="gallery-grid">
+        <video controls>
+          <source src="https://ik.imagekit.io/cetyeqvy3t/VID-20250722-WA0101.mp4?updatedAt=1753260663996" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <img src="https://i.postimg.cc/MZn422k3/IMG-20250722-WA0086.jpg" alt="School Image 1">
+        <img src="https://i.postimg.cc/Cdyk9fy0/IMG-20250722-WA0087.jpg" alt="School Image 2">
+        <img src="https://i.postimg.cc/mZKnTXBL/IMG-20250722-WA0088.jpg" alt="School Image 3">
+        <img src="https://i.postimg.cc/0jK7t0BZ/IMG-20250722-WA0090.jpg" alt="School Image 4">
+        <img src="https://i.postimg.cc/3JpcNXxg/IMG-20250722-WA0091.jpg" alt="School Image 5">
+        <img src="https://i.postimg.cc/3wrStzCB/IMG-20250722-WA0092.jpg" alt="School Image 6">
+        <img src="https://i.postimg.cc/52VkCXXD/IMG-20250722-WA0094.jpg" alt="School Image 7">
+        <img src="https://i.postimg.cc/Sxf17m8R/IMG-20250722-WA0095.jpg" alt="School Image 8">
+        <img src="https://i.postimg.cc/s2nnqKTR/IMG-20250722-WA0096.jpg" alt="School Image 9">
+        <img src="https://i.postimg.cc/PxP6jZ7v/IMG-20250722-WA0097.jpg" alt="School Image 10">
+        <img src="https://i.postimg.cc/WzZXDVT2/IMG-20250722-WA0098.jpg" alt="School Image 11">
+        <img src="https://i.postimg.cc/sXqTDxF6/IMG-20250722-WA0099.jpg" alt="School Image 12">
+        <img src="https://i.postimg.cc/QNK6YQ5R/IMG-20250722-WA0100.jpg" alt="School Image 13">
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+
+    <section id="testimonials" class="hidden">
+      <h2>What Our Community Says</h2>
+      <div>
+        <p>"Chifundo's inclusive approach has transformed my child's educational experience. The support and resources provided are exceptional."</p>
+        <p>- Mrs. J. Banda, Parent</p>
+      </div>
+      <div>
+        <p>"Teaching at Chifundo is rewarding because we see every student succeed in their own way. The digital tools make our work more effective."</p>
+        <p>- Mr. T. Phiri, Teacher</p>
+      </div>
+      <div>
+        <p>"Our results management system has revolutionized how we track student progress, making it easier to provide targeted support."</p>
+        <p>- Mr. Gundani, Headteacher</p>
+      </div>
+      <div>
+        <p>"As a student with special needs, I have found Chifundo to be the most welcoming and supportive environment."</p>
+        <p>- F. Kamiza, Student</p>
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+
+    <section id="contact" class="hidden">
+      <h2>Contact Us</h2>
+      <div>
+        <h3>School Address</h3>
+        <p>Chifundo Inclusive Secondary School<br>P.O. Box 122<br>Ngabu, Chikwawa</p>
+      </div>
+      <div>
+        <h3>Contact Information</h3>
+        <p>Email: <a href="mailto:chifundopetro1@gmail.com">chifundopetro1@gmail.com</a><br>
+           Phone: <a href="tel:+265998850080">0998850080</a><br>
+           WhatsApp: <a href="https://wa.me/+265888925170">0888925170</a></p>
+      </div>
+      <div>
+        <h3>Technical Support</h3>
+        <p>Developer WhatsApp: <a href="https://wa.me/+265888866269">0888866269</a></p>
+      </div>
+      <a href="#welcome" data-section="welcome" class="home-link">Back to Home</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Chifundo Inclusive Secondary School</p>
+    <p>Education for All Since 16th September 2024</p>
+    <p>© Chifundo Inclusive Secondary School. All rights reserved.</p>
+    <p>Designed with ❤️ for our students</p>
+  </footer>
+
+  <script>
+    // JavaScript for toggling the menu and section visibility
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('nav ul').classList.toggle('active');
+    });
+
+    // Get all navigation links, sections, and home links
+    const navLinks = document.querySelectorAll('nav ul li a');
+    const sections = document.querySelectorAll('main section');
+    const homeLinks = document.querySelectorAll('.home-link');
+    const portalLinks = document.querySelectorAll('.portal-card a');
+
+    // Function to show a specific section and hide all others
+    function showSection(sectionId) {
+      sections.forEach(section => {
+        section.classList.remove('active');
+        section.classList.add('hidden');
+      });
+      const targetSection = document.getElementById(sectionId);
+      if (targetSection) {
+        targetSection.classList.remove('hidden');
+        targetSection.classList.add('active');
+      }
+    }
+
+    // Add click event listeners to navigation links
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute('data-section');
+        showSection(sectionId);
+        // Close the menu on mobile after clicking
+        document.querySelector('nav ul').classList.remove('active');
+      });
+    });
+
+    // Add click event listeners to home links
+    homeLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute('data-section');
+        if (sectionId) {
+          showSection(sectionId);
+        }
+      });
+    });
+
+    // Add click event listeners to portal links
+    portalLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute('data-section');
+        const requiresPassword = link.getAttribute('data-requires-password');
+        
+        if (requiresPassword === 'true') {
+          const password = prompt('Please enter the password for the Admin Portal:');
+          if (password === 'chifu001') {
+            showSection(sectionId);
+          } else {
+            alert('Incorrect password. Access denied.');
+          }
+        } else {
+          showSection(sectionId);
+        }
+      });
+    });
+
+    // Initialize with only welcome section visible
+    showSection('welcome');
+  </script>
+</body>
+</html>
