@@ -365,13 +365,6 @@
       section h3 {
         font-size: 1.4rem;
       }
-
-      /* Grid layout for sections */
-      #about, #features, #gallery, #testimonials, #contact {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-      }
     }
 
     @media (min-width: 1024px) {
@@ -580,6 +573,9 @@
         
         // Close mobile menu if open
         navMenu.classList.remove('active');
+        
+        // Scroll to top of the section
+        window.scrollTo(0, 0);
       }
 
       // Set initial state - only welcome section visible
