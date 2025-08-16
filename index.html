@@ -205,10 +205,6 @@
       display: block;
     }
 
-    section.hidden {
-      display: none;
-    }
-
     section h2 {
       font-size: 1.6rem;
       margin-bottom: 1rem;
@@ -420,12 +416,12 @@
     <nav>
       <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
       <ul>
-        <li><a href="#welcome">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#welcome" class="nav-link" data-section="welcome">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#features" class="nav-link" data-section="features">Features</a></li>
+        <li><a href="#gallery" class="nav-link" data-section="gallery">Gallery</a></li>
+        <li><a href="#testimonials" class="nav-link" data-section="testimonials">Testimonials</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact Us</a></li>
       </ul>
     </nav>
   </header>
@@ -450,7 +446,7 @@
       </div>
     </section>
 
-    <section id="about" class="hidden">
+    <section id="about">
       <h2>About Our School</h2>
       <div>
         <h3>Our Mission</h3>
@@ -464,10 +460,10 @@
         <h3>Our Facilities</h3>
         <p>With state-of-the-art facilities and dedicated educators, we achieve outstanding academic results while focusing on character and community.</p>
       </div>
-      <a href="#welcome" class="home-link">Back to Home</a>
+      <a href="#welcome" class="home-link" data-section="welcome">Back to Home</a>
     </section>
 
-    <section id="features" class="hidden">
+    <section id="features">
       <h2>Key Features</h2>
       <div>
         <h3>Inclusive Education</h3>
@@ -481,10 +477,10 @@
         <h3>Report Generation</h3>
         <p>Generate comprehensive PDF reports to track academic progress and achievements.</p>
       </div>
-      <a href="#welcome" class="home-link">Back to Home</a>
+      <a href="#welcome" class="home-link" data-section="welcome">Back to Home</a>
     </section>
 
-    <section id="gallery" class="hidden">
+    <section id="gallery">
       <h2>School Gallery</h2>
       <div class="gallery-grid">
         <video controls>
@@ -505,10 +501,10 @@
         <img src="https://i.postimg.cc/sXqTDxF6/IMG-20250722-WA0099.jpg" alt="School Image 12">
         <img src="https://i.postimg.cc/QNK6YQ5R/IMG-20250722-WA0100.jpg" alt="School Image 13">
       </div>
-      <a href="#welcome" class="home-link">Back to Home</a>
+      <a href="#welcome" class="home-link" data-section="welcome">Back to Home</a>
     </section>
 
-    <section id="testimonials" class="hidden">
+    <section id="testimonials">
       <h2>What Our Community Says</h2>
       <div class="testimonial">
         <p>"Chifundo's inclusive approach has transformed my child's educational experience. The support and resources provided are exceptional."</p>
@@ -526,10 +522,10 @@
         <p>"As a student with special needs, I have found Chifundo to be the most welcoming and supportive environment."</p>
         <p>- F. Kamiza, Student</p>
       </div>
-      <a href="#welcome" class="home-link">Back to Home</a>
+      <a href="#welcome" class="home-link" data-section="welcome">Back to Home</a>
     </section>
 
-    <section id="contact" class="hidden">
+    <section id="contact">
       <h2>Contact Us</h2>
       <div class="contact-info">
         <h3>School Address</h3>
@@ -545,7 +541,7 @@
         <h3>Technical Support</h3>
         <p>Developer WhatsApp: <a href="https://wa.me/+265888866269">0888866269</a></p>
       </div>
-      <a href="#welcome" class="home-link">Back to Home</a>
+      <a href="#welcome" class="home-link" data-section="welcome">Back to Home</a>
     </section>
   </main>
 
@@ -557,46 +553,54 @@
   </footer>
 
   <script>
-    // Toggle mobile menu
-    document.querySelector('.menu-toggle').addEventListener('click', () => {
-      document.querySelector('nav ul').classList.toggle('active');
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle mobile menu
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.querySelector('nav ul');
+      
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
 
-    // Navigation between sections
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        
-        // Hide all sections
-        document.querySelectorAll('main section').forEach(section => {
+      // Navigation functionality
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('main section');
+      const homeLinks = document.querySelectorAll('.home-link');
+
+      // Function to show a specific section and hide all others
+      function showSection(sectionId) {
+        sections.forEach(section => {
           section.classList.remove('active');
-          section.classList.add('hidden');
         });
         
-        // Show target section
-        document.getElementById(targetId).classList.remove('hidden');
-        document.getElementById(targetId).classList.add('active');
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
         
         // Close mobile menu if open
-        document.querySelector('nav ul').classList.remove('active');
-      });
-    });
+        navMenu.classList.remove('active');
+      }
 
-    // Home links functionality
-    document.querySelectorAll('.home-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Hide all sections
-        document.querySelectorAll('main section').forEach(section => {
-          section.classList.remove('active');
-          section.classList.add('hidden');
+      // Set initial state - only welcome section visible
+      showSection('welcome');
+
+      // Add click event listeners to navigation links
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const sectionId = link.getAttribute('data-section');
+          showSection(sectionId);
         });
-        
-        // Show welcome section
-        document.getElementById('welcome').classList.remove('hidden');
-        document.getElementById('welcome').classList.add('active');
+      });
+
+      // Add click event listeners to home links
+      homeLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const sectionId = link.getAttribute('data-section');
+          showSection(sectionId);
+        });
       });
     });
   </script>
